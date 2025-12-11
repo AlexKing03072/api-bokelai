@@ -1,16 +1,20 @@
 import sqlite3
 
-DATABASE_URL = "./bokelai.db"
+DB_PATH = "./bokelai.db"
 
 
 def get_db_connection() -> sqlite3.Connection:
-    """取得 SQLite 連線和 cursor"""
-    conn = sqlite3.connect(DATABASE_URL)
+    """
+    取得 SQLite 連線
+    返回：sqlite3.Connection 物件
+    """
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row  # 讓結果像字典一樣存取
     return conn
 
 def get_all_books(skip: int, limit: int) -> list[dict]:
-    """取得所有書籍，支援
+    """
+    取得所有書籍，支援
     分頁查詢書籍（手動連線管理）
     參數：
     - skip: 跳過前 N 筆
