@@ -9,10 +9,10 @@
 ![Swagger UI（/docs）畫面](imgs/swagger.png)
 
 ## ReDoc (/redoc) 畫面
-![ReDoc (/redoc) 畫面](imgs/start.png)
+![ReDoc (/redoc) 畫面](imgs/redoc.png)
 
 ## Postman 測試 GET /books、POST、DELETE 的成功截圖
-![Postman測試截圖](imgs/start.png)
+![Postman測試截圖](imgs/postman_test.jpg)
 
 
 ## 📜 專案簡介
