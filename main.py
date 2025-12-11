@@ -61,10 +61,14 @@ def update_book(
         success = db.update_book(book_id, **book_data)
         if not success:
             raise HTTPException(status_code=404, detail="書籍未找到，無法更新")
-        updated_book = db.get_book_by_id(book_id)
-        return updated_book
+        return db.get_book_by_id(book_id)
+    except HTTPException:
+    # 保留原本的 HTTP 狀態碼與訊息
+        raise
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"更新書籍時發生錯誤：{str(e)}")
+    # 「預期外」的錯誤，再轉成 500
+        raise HTTPException(status_code=500, detail="更新書籍時發生錯誤")
 
 
 @app.delete("/books/{book_id}", status_code=204)
@@ -74,5 +78,8 @@ def delete_book(book_id: int = Path(..., ge=1, description="書籍 ID")) -> None
         success = db.delete_book(book_id)
         if not success:
             raise HTTPException(status_code=404, detail="書籍未找到，無法刪除")
+    except HTTPException:
+        raise
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"刪除書籍時發生錯誤：{str(e)}")
+        raise HTTPException(status_code=500, detail="刪除書籍時發生錯誤")
